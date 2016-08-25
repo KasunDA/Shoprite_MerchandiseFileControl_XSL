@@ -14,7 +14,7 @@
 				   </xsl:call-template>
 				</xsl:element>
 				<xsl:element name="price">
-					<xsl:value-of select="E1WBB08/KWERT*100"/>
+					<xsl:value-of select="format-number(E1WBB08/KWERT*100,'#')"/>
 				</xsl:element>
 				<xsl:element name="type">
 					<xsl:value-of select="KSCHL"/>

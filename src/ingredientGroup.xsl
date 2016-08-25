@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:template name="ingredientGroup" match="ZXWBBDLD05/IDOC/E1WBB01/E1WBB03">
+	<xsl:template name="ingredientGroup" match="E1WBB03">
 		<xsl:param name="spras"/>
 		<xsl:param name="countryoforigin"/>
 		<xsl:param name="contentunit"/>

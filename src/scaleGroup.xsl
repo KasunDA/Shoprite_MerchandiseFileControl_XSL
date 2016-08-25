@@ -3,11 +3,11 @@
 	<xsl:template name="scaleGroup">
 		<xsl:element name="scaleGroup">
 			<xsl:element name="scaleGroupId">
-				<xsl:value-of select="ZXWBBDLD05/IDOC/E1WBB01/E1WBB09/SCAGR"/>
+				<xsl:value-of select="../../E1WBB09/SCAGR"/>
 			</xsl:element>
 			<xsl:element name="scaleIndicator">
 				<xsl:choose>
-					<xsl:when test="count(ZXWBBDLD05/IDOC/E1WBB01/E1WBB09/SCAGR)=1">
+					<xsl:when test="count(../../E1WBB09/SCAGR)=1">
 						<xsl:value-of select="1"/>
 					</xsl:when>
 					<xsl:otherwise>0</xsl:otherwise>
@@ -15,7 +15,7 @@
 			</xsl:element>
 			<xsl:element name="weightIndicator">
 				<xsl:choose>
-					<xsl:when test="count(ZXWBBDLD05/IDOC/E1WBB01/E1WBB09/SCAGR)=1 and ZXWBBDLD05/IDOC/E1WBB01/E1WBB02/BASME='KG'">1</xsl:when>
+					<xsl:when test="count(../../E1WBB09/SCAGR)=1 and ../../E1WBB02/BASME='KG'">1</xsl:when>
 					<xsl:otherwise>0</xsl:otherwise>
 				</xsl:choose>
 			</xsl:element>

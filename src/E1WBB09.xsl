@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:template name="E1WBB09" match="ZXWBBDLD05/IDOC/E1WBB01/E1WBB09">
+	<xsl:template name="E1WBB09" match="E1WBB09">
 		<xsl:element name="allowZeroPrice">
-			<xsl:value-of select="ZE1WBB09/PRAT1"/>
+			<xsl:choose>
+				<xsl:when test="ZE1WBB09/PRAT1=X">1</xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
+			</xsl:choose>
 		</xsl:element>
 		<xsl:element name="manualPrice">
-			<xsl:value-of select="ZE1WBB09/PRAT2"/>
+			<xsl:choose>
+				<xsl:when test="ZE1WBB09/PRAT2=X">1</xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
+			</xsl:choose>
 		</xsl:element>
 		<xsl:element name="promptForQuantity">
 			<xsl:choose>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:template name="perBarcode" match="ZXWBBDLD05/IDOC/E1WBB01/E1WBB03/E1WBB04">
+
+	<xsl:template name="perBarcode" match="E1WBB03/E1WBB04">
 		<xsl:param name="articleNumber"/>
 		<xsl:param name="departmentNumber"/>
 		<xsl:param name="departmentName"/>
-		<xsl:param name="mechandiseCategory"/>
+		<xsl:param name="merchandiseCategory"/>
 		<xsl:param name="taxClassification"/>
 		<xsl:param name="itemDescription"/>
 		<xsl:param name="spras"/>
@@ -14,15 +15,20 @@
 		<xsl:param name="organic"/>
 		<xsl:param name="irradiated"/>
 		<xsl:variable name="posDescription" select="../E1WBB20/MAKTM_ME"/>
+		<xsl:variable name="itemNo">
+			<xsl:for-each select="../E1WBB04">
+				<xsl:if test="HPEAN='X'">
+					<xsl:value-of select="EAN11"/>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:variable>
 		<xsl:if test="count(../E1WBB07[KSCHL='VKP0'])">
 			<xsl:element name="posMerchandise">
 				<xsl:element name="barcode">
 					<xsl:value-of select="EAN11"/>
 				</xsl:element>
 				<xsl:element name="itemNo">
-					<xsl:if test="HPEAN='X'">
-						<xsl:value-of select="EAN11"/>
-					</xsl:if>
+					<xsl:value-of select="$itemNo"/>
 				</xsl:element>
 				<xsl:element name="articleNo">
 					<xsl:value-of select="$articleNumber"/>
@@ -33,8 +39,8 @@
 				<xsl:element name="departmentName">
 					<xsl:value-of select="$departmentName"/>
 				</xsl:element>
-				<xsl:element name="mechandiseCategory">
-					<xsl:value-of select="$mechandiseCategory"/>
+				<xsl:element name="merchandiseCategory">
+					<xsl:value-of select="$merchandiseCategory"/>
 				</xsl:element>
 				<!-- Map empty -->
 				<xsl:element name="merchandiseCategoryName"/>
@@ -50,6 +56,7 @@
 				<!-- TEMPLATE name="priceGroup" -->
 				<xsl:apply-templates select="../E1WBB07"/>
 				<xsl:call-template name="scaleGroup"/>
+				<!-- INGREDIENT GROUP -->
 				<xsl:apply-templates select="..">
 					<xsl:with-param name="spras" select="$spras"/>
 					<xsl:with-param name="countryoforigin" select="$countryoforigin"/>
@@ -61,7 +68,7 @@
 				<!-- TEMPLATE name="linkedGroup" -->
 				<xsl:apply-templates select="../E1WBBEM/ZE1WBBEM"/>
 				<!-- TEMPLATE name="shelLife" -->
-				<xsl:apply-templates select="../..//E1WBB12/ZE1WBB12"/>
+				<xsl:apply-templates select="../../E1WBB12/ZE1WBB12"/>
 				<!-- TEMPLATE name="E1WBB09" -->
 				<xsl:apply-templates select="../../E1WBB09"/>
 				<xsl:element name="uom">
@@ -69,17 +76,19 @@
 				</xsl:element>
 				<xsl:element name="uomDescription"/>
 				<xsl:element name="deleteDate">
-					<xsl:value-of select="../../E1WBB09/VKDBI"/>
+					<xsl:call-template name="dateFormat">
+						<xsl:with-param name="date" select="../../E1WBB09/VKDBI"/>
+					</xsl:call-template>
 				</xsl:element>
 				<xsl:element name="immediateDeleteIndicator">
 					<xsl:choose>
-						<xsl:when test="C_INFO_04='003'">1</xsl:when>
+						<xsl:when test="string(C_INFO_04)='003'">1</xsl:when>
 						<xsl:otherwise>0</xsl:otherwise>
 					</xsl:choose>
 				</xsl:element>
 				<xsl:element name="shortGroupId">
 					<xsl:choose>
-						<xsl:when test="count(/../E1WBB09/ZE1WBB09/MVGR1)=1">
+						<xsl:when test="count(../E1WBB09/ZE1WBB09/MVGR1)=1">
 							<xsl:value-of select="format-number(/../E1WBB09/ZE1WBB09/MVGR1,'000')"/>
 						</xsl:when>
 						<xsl:otherwise/>
