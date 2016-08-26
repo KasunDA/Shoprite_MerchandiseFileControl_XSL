@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
 	<xsl:template name="perBarcode" match="E1WBB03/E1WBB04">
 		<xsl:param name="articleNumber"/>
 		<xsl:param name="departmentNumber"/>
@@ -103,14 +102,10 @@
 					</xsl:choose>
 				</xsl:element>
 				<xsl:element name="minNegativeAmount">
-					<xsl:if test="count(./E1WBB07[KSCHL='ZOPS'])>0 and SCALE_TYPE='C' and ../E1WBB08/E1WBBSC/SCABAS_QUAN='1'">
-						<xsl:value-of select="../E1WBB08/E1WBBSC/COND_VALUE"/>
-					</xsl:if>
+					<xsl:value-of select="../E1WBB07[KSCHL='ZOPS']/E1WBB08/E1WBBSC[SCALE_TYPE='C'][SCABAS_QUAN='1.000']/COND_VALUE"/>
 				</xsl:element>
 				<xsl:element name="maxNegativeAmount">
-					<xsl:if test="count(./E1WBB07[KSCHL='ZOPS'])>0 and SCALE_TYPE='C' and ../E1WBB08/E1WBBSC/SCABAS_QUAN='2'">
-						<xsl:value-of select="../E1WBB08/E1WBBSC/COND_VALUE"/>
-					</xsl:if>
+					<xsl:value-of select="../E1WBB07[KSCHL='ZOPS']/E1WBB08/E1WBBSC[SCALE_TYPE='C'][SCABAS_QUAN='2.000']/COND_VALUE"/>
 				</xsl:element>
 			</xsl:element>
 		</xsl:if>
