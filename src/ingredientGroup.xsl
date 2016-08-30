@@ -13,6 +13,7 @@
 		<xsl:element name="ingredientGroup">
 			<xsl:element name="ingredients">
 				<xsl:call-template name="string-concat-ingroup">
+				
 					<xsl:with-param name="addimatnr_type" select="'INGREDIENTS'"/>
 					<xsl:with-param name="spras" select="$spras"/>
 				</xsl:call-template>
@@ -27,41 +28,43 @@
 				</xsl:call-template>
 			</xsl:element>
 			<xsl:element name="storageInstructions">
-			<xsl:call-template name="string-concat-ingroup">
+				<xsl:call-template name="string-concat-ingroup">
 					<xsl:with-param name="addimatnr_type" select="'STORAGE_INST'"/>
 					<xsl:with-param name="spras" select="$spras"/>
 				</xsl:call-template>
 			</xsl:element>
 			<xsl:element name="allergens">
-			<xsl:call-template name="string-concat-ingroup">
+				<xsl:call-template name="string-concat-ingroup">
 					<xsl:with-param name="addimatnr_type" select="'ALLERGENS'"/>
 					<xsl:with-param name="spras" select="$spras"/>
 				</xsl:call-template>
 			</xsl:element>
 			<xsl:element name="precautions">
-			<xsl:call-template name="string-concat-ingroup">
-					<xsl:with-param name="addimatnr_type" select="'PRECAUTIONARY'"/>
+				<xsl:call-template name="string-concat-ingroup">
+					<xsl:with-param name="addimatnr_type" select="'PRECAUTIONS'"/>
 					<xsl:with-param name="spras" select="$spras"/>
 				</xsl:call-template>
 			</xsl:element>
 			<xsl:element name="base100g">
-					<xsl:choose>
-						<xsl:when test="(($contentunit='ML' or $contentunit='G') and ($baseuom='KG' or $baseuom='L'))">1</xsl:when>
-						<xsl:otherwise>0</xsl:otherwise>
-					</xsl:choose>
+				<xsl:choose>
+					<xsl:when test="(($contentunit='ML' and $contentunit='G') or ($baseuom='KG' and $baseuom='L'))">1</xsl:when>
+					<xsl:otherwise>0</xsl:otherwise>
+				</xsl:choose>
 			</xsl:element>
-			<xsl:element name="organic"><xsl:value-of select="$organic"/></xsl:element>
-			<xsl:element name="irradiated"><xsl:value-of select="$irradiated"/></xsl:element>
+			<xsl:element name="organic">
+				<xsl:value-of select="$organic"/>
+			</xsl:element>
+			<xsl:element name="irradiated">
+				<xsl:value-of select="$irradiated"/>
+			</xsl:element>
 		</xsl:element>
 	</xsl:template>
 	<xsl:template name="string-concat-ingroup">
 		<xsl:param name="addimatnr_type"/>
 		<xsl:param name="spras"/>
 		<xsl:variable name="addimatnr_spras">
-			<xsl:for-each select="E1WTADAL1/E1WTADAL2">
-				<xsl:if test="../../E1WTADAL1[ADDIMATNR=$addimatnr_type] and ADDISPRAS =$spras">
-					<xsl:value-of select="ADDITXT"/>
-				</xsl:if>
+			<xsl:for-each select="E1WTADAL1[ADDIMATNR=$addimatnr_type]/E1WTADAL2[ADDISPRAS=$spras][number(ADDIROWNR)>0]/ADDITXT">
+				<xsl:value-of select="."/>
 			</xsl:for-each>
 		</xsl:variable>
 		<xsl:choose>
@@ -69,10 +72,8 @@
 				<xsl:value-of select="$addimatnr_spras"/>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:for-each select="E1WTADAL1/E1WTADAL2">
-					<xsl:if test="../../E1WTADAL1[ADDIMATNR=$addimatnr_type] and ADDISPRAS ='EN'">
-						<xsl:value-of select="ADDITXT"/>
-					</xsl:if>
+				<xsl:for-each select="E1WTADAL1[ADDIMATNR=$addimatnr_type]/E1WTADAL2[ADDISPRAS='EN'][number(ADDIROWNR)>0]/ADDITXT">
+					<xsl:value-of select="."/>
 				</xsl:for-each>
 			</xsl:otherwise>
 		</xsl:choose>

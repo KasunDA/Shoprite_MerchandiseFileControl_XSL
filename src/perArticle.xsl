@@ -23,7 +23,7 @@
 		<xsl:variable name="departmentName" select="E1WBB02/ZE1WBB02/ABTNR_TEXT"/>
 		<xsl:variable name="merchandiseCategory" select="E1WBB02/MATKL"/>
 		<xsl:variable name="itemDescription" select="E1WBB10/MAKTM"/>
-		<xsl:variable name="spras" select="SPRAS"/>
+		<xsl:variable name="spras" select="LANG_ISO"/>
 		<xsl:variable name="countryoforigin" select="E1WBB02/ZE1WBB02/LAND1"/>
 		<xsl:variable name="contentunit" select="E1WBB02/MARA_INHME"/>
 		<xsl:variable name="baseuom" select="E1WBB02/BASME"/>
