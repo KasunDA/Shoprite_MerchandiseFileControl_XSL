@@ -3,13 +3,13 @@
 	<xsl:template name="E1WBB09" match="E1WBB09">
 		<xsl:element name="allowZeroPrice">
 			<xsl:choose>
-				<xsl:when test="ZE1WBB09/PRAT1=X">1</xsl:when>
+				<xsl:when test="ZE1WBB09/PRAT1='X'">1</xsl:when>
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>
 		<xsl:element name="manualPrice">
 			<xsl:choose>
-				<xsl:when test="ZE1WBB09/PRAT2=X">1</xsl:when>
+				<xsl:when test="ZE1WBB09/PRAT2='X'">1</xsl:when>
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>
@@ -33,13 +33,13 @@
 		</xsl:element>
 		<xsl:element name="probihitSale">
 			<xsl:choose>
-				<xsl:when test="ZE1WBB09/PRAT1=LP">1</xsl:when>
+				<xsl:when test="ZE1WBB09/VMSTA='LP'">1</xsl:when>
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>
 		<xsl:element name="restrictItem">
 			<xsl:choose>
-				<xsl:when test="ZE1WBB09/PRAT3=X">1</xsl:when>
+				<xsl:when test="ZE1WBB09/PRAT3='X'">1</xsl:when>
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>

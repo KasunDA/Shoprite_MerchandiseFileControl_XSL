@@ -23,7 +23,7 @@
 			</xsl:element>
 			<xsl:element name="nutritionalValues">
 				<xsl:call-template name="string-concat-ingroup">
-					<xsl:with-param name="addimatnr_type" select="'NUTRITIONAL'"/>
+					<xsl:with-param name="addimatnr_type" select="'NUTRITIONALVALUES'"/>
 					<xsl:with-param name="spras" select="$spras"/>
 				</xsl:call-template>
 			</xsl:element>

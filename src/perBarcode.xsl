@@ -87,8 +87,8 @@
 				</xsl:element>
 				<xsl:element name="shortGroupId">
 					<xsl:choose>
-						<xsl:when test="count(../E1WBB09/ZE1WBB09/MVGR1)=1">
-							<xsl:value-of select="format-number(/../E1WBB09/ZE1WBB09/MVGR1,'000')"/>
+						<xsl:when test="count(../../E1WBB09/ZE1WBB09/MVGR1)=1">
+							<xsl:value-of select="substring(concat('000',../../E1WBB09/ZE1WBB09/MVGR1),string-length(../../E1WBB09/ZE1WBB09/MVGR1)+1,3)"/>
 						</xsl:when>
 						<xsl:otherwise/>
 					</xsl:choose>
@@ -96,7 +96,7 @@
 				<xsl:element name="onlinePurchaseSchemeId">
 					<xsl:choose>
 						<xsl:when test="count(../../E1WBB09/ZE1WBB09/MVGR2)=1">
-							<xsl:value-of select="format-number(/../E1WBB09/ZE1WBB09/MVGR2,'00')"/>
+							<xsl:value-of select="substring(concat('00',../../E1WBB09/ZE1WBB09/MVGR2),string-length(../../E1WBB09/ZE1WBB09/MVGR2)+1,2)"/>
 						</xsl:when>
 						<xsl:otherwise/>
 					</xsl:choose>
