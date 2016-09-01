@@ -15,11 +15,7 @@
 		<xsl:param name="irradiated"/>
 		<xsl:variable name="posDescription" select="../E1WBB20/MAKTM_ME"/>
 		<xsl:variable name="itemNo">
-			<xsl:for-each select="../E1WBB04">
-				<xsl:if test="HPEAN='X'">
-					<xsl:value-of select="EAN11"/>
-				</xsl:if>
-			</xsl:for-each>
+			<xsl:value-of select="../E1WBB04[HPEAN='X']/EAN11"/>
 		</xsl:variable>
 		<xsl:if test="count(../E1WBB07[KSCHL='VKP0'])">
 			<xsl:element name="posMerchandise">
@@ -87,8 +83,11 @@
 				</xsl:element>
 				<xsl:element name="shortGroupId">
 					<xsl:choose>
-						<xsl:when test="count(../../E1WBB09/ZE1WBB09/MVGR1)=1">
-							<xsl:value-of select="substring(concat('000',../../E1WBB09/ZE1WBB09/MVGR1),string-length(../../E1WBB09/ZE1WBB09/MVGR1)+1,3)"/>
+						<xsl:when test="count(../../E1WBB09/ZE1WBB09/MVGR1_TEXT)=1">
+							<xsl:variable name="var">
+								<xsl:value-of select="substring-before(substring-after (../../E1WBB09/ZE1WBB09/MVGR1_TEXT, ','), ',')"/>
+							</xsl:variable>
+							<xsl:value-of select="substring(concat('000',$var),string-length($var)+1,3)"/>
 						</xsl:when>
 						<xsl:otherwise/>
 					</xsl:choose>

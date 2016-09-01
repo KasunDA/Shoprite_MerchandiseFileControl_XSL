@@ -16,10 +16,11 @@
 					<xsl:with-param name="var" select="LZEIN"/>
 				</xsl:call-template>
 			</xsl:variable>
-			<xsl:variable name="maxlz" select="MAXLZ"/>
+			<xsl:variable name="maxlz" select="translate(MAXLZ,',','')"/>
 			<xsl:choose>
+			     <xsl:when test="$maxlz=0">1</xsl:when>
 				<xsl:when test="$maxlz*$lzein>999">999</xsl:when>
-				<xsl:otherwise>1</xsl:otherwise>
+				<xsl:otherwise><xsl:value-of select="$maxlz*$lzein"/></xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>
 	</xsl:template>
