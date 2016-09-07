@@ -13,23 +13,24 @@
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>
+		<xsl:comment>KWDHT=<xsl:value-of select="KWDHT"/></xsl:comment>
 		<xsl:element name="promptForQuantity">
-			<xsl:choose>
-				<xsl:when test="KWDHT=3">1</xsl:when>
-				<xsl:otherwise>0</xsl:otherwise>
-			</xsl:choose>
+			<xsl:call-template name="bitmask">
+				<xsl:with-param name="sum" select="KWDHT"/>
+				<xsl:with-param name="mask">4</xsl:with-param>
+			</xsl:call-template>
 		</xsl:element>
 		<xsl:element name="probihitQuantity">
-			<xsl:choose>
-				<xsl:when test="KWDHT=1">1</xsl:when>
-				<xsl:otherwise>0</xsl:otherwise>
-			</xsl:choose>
+			<xsl:call-template name="bitmask">
+				<xsl:with-param name="sum" select="KWDHT"/>
+				<xsl:with-param name="mask">2</xsl:with-param>
+			</xsl:call-template>
 		</xsl:element>
 		<xsl:element name="probihitRepeat">
-			<xsl:choose>
-				<xsl:when test="KWDHT=2">1</xsl:when>
-				<xsl:otherwise>0</xsl:otherwise>
-			</xsl:choose>
+			<xsl:call-template name="bitmask">
+				<xsl:with-param name="sum" select="KWDHT"/>
+				<xsl:with-param name="mask">1</xsl:with-param>
+			</xsl:call-template>
 		</xsl:element>
 		<xsl:element name="probihitSale">
 			<xsl:choose>
@@ -43,5 +44,22 @@
 				<xsl:otherwise>0</xsl:otherwise>
 			</xsl:choose>
 		</xsl:element>
+	</xsl:template>
+	<xsl:template name="bitmask">
+		<xsl:param name="sum"/>
+		<xsl:param name="mask"/>
+		<xsl:variable name="check">
+			<xsl:choose>
+				<xsl:when test="string(number($sum))='NaN'">0</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$sum"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
+		<xsl:choose>
+			<xsl:when test="(($check mod ($mask * 2)) - ($check mod $mask)) = $mask">1</xsl:when>
+			<xsl:otherwise>0</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet>
