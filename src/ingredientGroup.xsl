@@ -41,7 +41,7 @@
 			</xsl:element>
 			<xsl:element name="precautions">
 				<xsl:call-template name="string-concat-ingroup">
-					<xsl:with-param name="addimatnr_type" select="'PRECAUTIONS'"/>
+					<xsl:with-param name="addimatnr_type" select="'PRECAUTION'"/>
 					<xsl:with-param name="spras" select="$spras"/>
 				</xsl:call-template>
 			</xsl:element>
