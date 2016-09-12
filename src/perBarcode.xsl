@@ -17,6 +17,13 @@
 		<xsl:variable name="itemNo">
 			<xsl:value-of select="../E1WBB04[HPEAN='X']/EAN11"/>
 		</xsl:variable>
+		<xsl:if test="count(../E1WBB07[KSCHL='VKP0'])=0">
+			<xsl:comment>
+				<xsl:value-of select="concat('No VKP0 Pricing Objects Found for Article:  ',$articleNumber)"/>
+				<xsl:value-of select="concat(' UOM: ',../MEINH)"/>
+				<xsl:value-of select="concat(' Barcode: ',EAN11)"/>
+			</xsl:comment>
+		</xsl:if>
 		<xsl:if test="count(../E1WBB07[KSCHL='VKP0'])">
 			<xsl:element name="posMerchandise">
 				<xsl:element name="barcode">
